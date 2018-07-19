@@ -2,7 +2,7 @@
   <div>
       <p>Completed Tasks: {{todos.filter(todo => {return todo.done === true}).length}}</p>
       <p>Pending Tasks: {{todos.filter(todo => {return todo.done === false}).length}}</p>
-        <to-do v-for="todo in todos" v-bind:todo="todo" v-bind:key="todo.title"></to-do>
+        <to-do v-on:delete-todo="deleteTodo" v-for="todo in todos" v-bind:todo="todo" v-bind:key="todo.title"></to-do>
   </div>
 </template>
 
@@ -11,10 +11,16 @@
 import ToDo from './ToDo';
 
 export default {
-  props: ["todos"],
+  props: ['todos'],
   components: {
-      ToDo,
-  }
+    ToDo,
+  },
+  methods: {
+      deleteTodo(todo) {
+      const todoIndex = this.todos.indexOf(todo);
+      this.todos.splice(todoIndex, 1);
+    },
+  },
 };
 </script>
 
