@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <to-do-list v-bind:todos="todos"></to-do-list>
   </div>
 </template>
