@@ -33,21 +33,21 @@
         </div>
         </div>
     </div>
-    <div class='ui bottom attached green basic button' v-show="!isEditng && todo.done" disabled>
+    <div class='ui bottom attached green basic button' v-show="!isEditing && todo.done" disabled>
         Completed
     </div>
-    <div class='ui bottom attached red basic button' v-show="!isEditing && !todo.done">
-        Complete
+    <div class='ui bottom attached red basic button' v-on:click="completeToDo(todo)" v-show="!isEditing && !todo.done">
+        Pending
     </div>
 </div>
 </template>
 
 <script type="text/javascript">
 export default {
-  props: ["todo"],
+  props: ['todo'],
   data() {
     return {
-      isEditing: false
+      isEditing: false,
     };
   },
   methods: {
@@ -58,7 +58,10 @@ export default {
       this.isEditing = false;
     },
     deleteTodo(todo) {
-        this.$emit('delete-todo', todo);
+      this.$emit('delete-todo', todo);
+    },
+    completeToDo(todo) {
+      this.$emit('complete-to-do', todo);
     },
   },
 };

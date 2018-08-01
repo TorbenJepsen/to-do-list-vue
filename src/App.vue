@@ -1,17 +1,26 @@
 <template>
   <div id="app">
+    <h1 class='ui dividing centered header'>Vue.js To-Do App</h1>
+    <div class='ui three column centered grid'>
+    <div class='column'>
     <to-do-list v-bind:todos="todos"></to-do-list>
+    <create-to-do v-on:create-to-do="createToDo"></create-to-do>
+    </div>
+    </div>
   </div>
 </template>
 
 
 <script>
+import sweetalert from 'sweetalert';
 import ToDoList from './components/ToDoList';
+import CreateToDo from './components/CreateToDo';
 
 export default {
   name: 'app',
   components: {
     ToDoList,
+    CreateToDo,
   },
   data() {
     return {
@@ -39,8 +48,11 @@ export default {
       ],
     };
   },
+  methods: {
+    createToDo(newTodo) {
+      this.todos.push(newTodo);
+      sweetalert('Success!', 'To-Do created!', 'success');
+    },
+  },
 };
 </script>
-
-<style>
-</style>
